@@ -5,28 +5,27 @@ import java.util.Queue;
 
 public class findUserCompVisitor extends Visitor {
     /**
-     * Search the tree starting from the root node until a specified user component
-     * is found
+     * Search the tree starting at the root node until the user is found or not
      * 
-     * @param root  node to start traversal
-     * @param userC the user component we are looking for
-     * @return if user is found return the node, if not then return null
+     * @param root     the node to start searching at
+     * @param userComp the user to search for
+     * @return if the user is found return the node, else return a null value
      */
-    public Tree visit(Tree root, userComponent userC) {
+    public CompositeTree visit(CompositeTree root, UserComponent userComp) {
         if (root == null)
             return null;
-        Queue<Tree> queue = new LinkedList<>();
+        Queue<CompositeTree> queue = new LinkedList<>();
         queue.offer(root);
         while (!queue.isEmpty()) {
             int len = queue.size();
             for (int i = 0; i < len; i++) {
-                Tree node = queue.poll();
+                CompositeTree node = queue.poll();
                 assert node != null;
-                if (node.getUID().equals(userC.getUID())
-                        && node.getUserComponent().getClass().equals(userC.getClass())) {
+                if (node.getUID().equals(userComp.getUID())
+                        && node.getUserComponent().getClass().equals(userComp.getClass())) {
                     return node;
                 }
-                for (Tree item : node.getChildren()) {
+                for (CompositeTree item : node.getChildren()) {
                     queue.offer(item);
                 }
             }

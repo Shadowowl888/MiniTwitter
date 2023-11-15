@@ -1,22 +1,16 @@
 package MiniTwitter;
 
-public abstract class userComponent {
+/**
+ * User Component to keep track of unique users.
+ */
+public abstract class UserComponent {
     private String UID;
-    private long creationTime;
 
     public String getUID() {
         return UID;
     }
 
-    public long getCreationTime() {
-        return creationTime;
-    }
-
-    public void setCreationTime(long time) {
-        this.creationTime = time;
-    }
-
-    public userComponent getComponent(int componentIndex) {
+    public UserComponent getComponent(int componentIndex) {
         throw new UnsupportedOperationException();
     }
 

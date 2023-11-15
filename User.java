@@ -3,21 +3,22 @@ package MiniTwitter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User extends userComponent implements Observable {
+/**
+ * User implements Observer Pattern to keep track of the followers following the
+ * user and update their
+ */
+public class User extends UserComponent implements Observable {
 
     private String UID;
     private ArrayList<Observer> observerList = new ArrayList();
     private ArrayList<User> following = new ArrayList();
-    private newsFeed newsFeed = new newsFeed();
+    private NewsFeed newsFeed = new NewsFeed();
     private ArrayList<String> messages = new ArrayList<String>();
     private ArrayList<User> followerList = new ArrayList();
-    private long lastUpdateTime;
 
     public User(String username) {
         this.UID = username;
         this.attach(newsFeed);
-        this.setCreationTime(System.currentTimeMillis());
-        this.lastUpdateTime = this.getCreationTime();
     }
 
     // Returns the username
@@ -35,15 +36,7 @@ public class User extends userComponent implements Observable {
         return following;
     }
 
-    public long getLastUpdateTime() {
-        return lastUpdateTime;
-    }
-
-    public void setLastUpdateTime(long time) {
-        this.lastUpdateTime = time;
-    }
-
-    // Get list of names that user is following
+    // Get list of followers
     public String[] getFollowingNames() {
         String[] s = new String[500]; // Max Capacity 500
         for (int i = 0; i < following.size(); i++) {
@@ -52,6 +45,7 @@ public class User extends userComponent implements Observable {
         return s;
     }
 
+    // REturn the followers list
     public String[] getFollowerList() {
         String[] s = new String[500]; // Max Capacity 500
         for (int i = 0; i < followerList.size(); i++) {
@@ -61,16 +55,14 @@ public class User extends userComponent implements Observable {
     }
 
     // Return the user's newsfeed
-    public newsFeed getNewsFeed() {
+    public NewsFeed getNewsFeed() {
         return newsFeed;
     }
 
-    // Add tweet to user and notify observers
+    // Add tweet to users feed
     public void tweet(String tweet) {
         this.messages.add(tweet);
         notifyFollowers(tweet);
-        setLastUpdateTime(this.newsFeed.getLastUpdateTime());
-        updateTime();
     }
 
     // Returns the tweets that the user has made
@@ -84,27 +76,19 @@ public class User extends userComponent implements Observable {
         user.followerList.add(this);
     }
 
-    // Add observers
-    public void attach(Observer o) {
-        observerList.add(o);
+    // Attach and detach method to edit observers
+    public void attach(Observer observer) {
+        observerList.add(observer);
     }
 
-    public void detach(Observer o) {
-        observerList.remove(o);
+    public void detach(Observer observer) {
+        observerList.remove(observer);
     }
 
-    // Update all followers time
-    public void updateTime() {
-        for (int i = 0; i < followerList.size(); i++) {
-            long lastUpTime = followerList.get(i).getNewsFeed().getLastUpdateTime();
-            followerList.get(i).setLastUpdateTime(lastUpTime);
-        }
-    }
-
-    // Update followers when tweet posted
+    // Update followers when tweet is posted
     public void notifyFollowers(String tweet) {
         for (Observer follower : observerList) {
-            follower.update((String) "From " + this.UID + ":    " + tweet);
+            follower.update((String) "From " + this.UID + " - " + tweet);
         }
     }
 }

@@ -4,13 +4,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class Tree {
+public class CompositeTree {
 
     private String uid;
-    private List<Tree> children = new LinkedList<>();
-    private userComponent userC;
+    private List<CompositeTree> children = new LinkedList<>();
+    private UserComponent userC;
 
-    public Tree(String userid, userComponent component) {
+    public CompositeTree(String userid, UserComponent component) {
         uid = userid;
         userC = component;
     }
@@ -21,7 +21,7 @@ public class Tree {
     }
 
     // Return children of node
-    public List<Tree> getChildren() {
+    public List<CompositeTree> getChildren() {
         return this.children;
     }
 
@@ -32,23 +32,23 @@ public class Tree {
      * @param root node to start traversal
      * @return the total number of messages from all users starting from root
      */
-    public int[] countMsg(Tree root) {
+    public int[] countMsg(CompositeTree root) {
         int msgCount = 0;
         int posMsg = 0;
         int[] c = new int[2];
-        Queue<Tree> queue = new LinkedList<>();
+        Queue<CompositeTree> queue = new LinkedList<>();
         queue.offer(root);
         while (!queue.isEmpty()) {
             int len = queue.size();
             for (int i = 0; i < len; i++) {
-                Tree node = queue.poll();
+                CompositeTree node = queue.poll();
                 assert node != null;
                 if (node.userC instanceof User) {
                     User user = (User) node.userC;
                     msgCount += user.getNewsFeed().countMessages();
                     posMsg += user.getNewsFeed().countPositiveMessages();
                 }
-                for (Tree item : node.children) {
+                for (CompositeTree item : node.children) {
                     queue.offer(item);
                 }
             }
@@ -59,12 +59,12 @@ public class Tree {
     }
 
     // Return the user component associated with the node
-    public userComponent getUserComponent() {
+    public UserComponent getUserComponent() {
         return userC;
     }
 
     // Accept visitors
-    public Tree accept(Visitor visitor, userComponent userComp) {
+    public CompositeTree accept(Visitor visitor, UserComponent userComp) {
         return visitor.visit(this, userComp);
     }
 }

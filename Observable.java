@@ -1,5 +1,8 @@
 package MiniTwitter;
 
+/**
+ * Interface for Observer Pattern methods.
+ */
 public interface Observable {
     public void attach(Observer observer);
 

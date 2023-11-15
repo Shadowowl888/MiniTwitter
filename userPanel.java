@@ -25,35 +25,29 @@ import java.util.Arrays;
 import java.awt.event.ActionEvent;
 import java.text.SimpleDateFormat;
 
-public class userPanel extends JFrame implements Observer {
+/**
+ * User UI panel to keep track of user information.
+ */
+public class UserPanel extends JFrame implements Observer {
 
 	private JPanel contentPane;
 	private JTextField userTxtField;
 	private JTextField message_box;
 	private User user;
-	private Tree root;
+	private CompositeTree root;
 	private findUserCompVisitor findUserC = new findUserCompVisitor();
 	private JList following_JList;
 	private JList newsFeed_Jlist;
 
 	/**
-	 * @param u    the userName object of the user panel
-	 * @param Tree the root node of the tree (root userGroup)
+	 * @param user          user to open the UI view for
+	 * @param CompositeTree the root of the user's node on the tree
 	 */
-	public userPanel(User u, Tree tree) {
-		user = u;
+	public UserPanel(User user, CompositeTree tree) {
+		this.user = user;
 		root = tree;
-		makeGui();
-	}
 
-	// Return the user object of this class
-	private User getUser() {
-		return user;
-	}
-
-	// Call methods to setup the UI
-	private void makeGui() {
-		setTitle("User Panel: " + user.getUID());
+		setTitle("MiniTwitter User Panel: " + user.getUID());
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 700, 600);
 		contentPane = new JPanel();
@@ -61,12 +55,16 @@ public class userPanel extends JFrame implements Observer {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
-		timePanel();
 		followUser();
 		followingList();
 		tweetPanel();
 		newsFeed();
 		setVisible(true);
+	}
+
+	// Return the user object
+	private User getUser() {
+		return user;
 	}
 
 	// Create UI to allow for users to be followed
@@ -202,32 +200,6 @@ public class userPanel extends JFrame implements Observer {
 			revArrayList.add(userNewsFeed.get(i));
 		}
 		newsFeed_Jlist.setListData(revArrayList.toArray());
-	}
-
-	// Assignment 3
-	private void timePanel() {
-		JPanel updatePanel = new JPanel();
-		contentPane.add(updatePanel);
-		updatePanel.setLayout(new GridLayout(1, 0, 0, 0));
-		// Set time created
-		JPanel timeCreated_panel = new JPanel();
-		updatePanel.add(timeCreated_panel);
-
-		JLabel timeCreated_label = new JLabel("");
-		timeCreated_panel.add(timeCreated_label);
-		// Convert time to readable format
-		SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy HH:mm:ss");
-		Date resultdate = new Date(user.getCreationTime());
-		timeCreated_label.setText(sdf.format(resultdate));
-
-		// Set most recent update time
-		JPanel lastUpdate_panel = new JPanel();
-		updatePanel.add(lastUpdate_panel);
-
-		JLabel lastUpdate_label = new JLabel("");
-		Date updateTime = new Date(user.getLastUpdateTime());
-		lastUpdate_label.setText(sdf.format(updateTime));
-		lastUpdate_panel.add(lastUpdate_label);
 	}
 
 	// Update the user UI tweets when changes are made in news feed

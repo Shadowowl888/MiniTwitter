@@ -10,7 +10,7 @@ A project hub for all the CS3560 assignments.
 
 ## Project 2: Mini Twitter
 
-The Singleton Pattern was used to create one instance of the Admin Panel to act as a manager control in the main driver program, App.java. Composite Pattern was used throughout the UI using the Java Swing UI Library. Visitor Pattern is used to keep track of the statisitical information with the users and groups. Observer pattern 
+The Singleton Pattern was used to create one instance of the Admin Panel to act as a manager control in the main driver program, App.java. Composite Pattern was used to add user and groups to the tree and keep track of the group directory using the Java Swing UI Library. Visitor Pattern is used to keep track of the statisitical information with the users and groups. Observer pattern 
 
 ### Problem Description
 In this programming assignment, you will build a Java­based Mini Twitter with graphical user interface (GUI) using Java Swing. This is going to be a pure desktop program, without web or mobile components. The goal of this assignment is to let you experience how to apply design patterns to build extensible software systems.

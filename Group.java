@@ -2,14 +2,13 @@ package MiniTwitter;
 
 import java.util.ArrayList;
 
-public class Group extends userComponent {
+public class Group extends UserComponent {
 
     private String UID;
-    private ArrayList<userComponent> userComponents = new ArrayList();
+    private ArrayList<UserComponent> userComponents = new ArrayList();
 
     public Group(String newGroupName) {
         UID = newGroupName;
-        this.setCreationTime(System.currentTimeMillis());
     }
 
     @Override
@@ -18,13 +17,13 @@ public class Group extends userComponent {
     }
 
     // Remove a user or group
-    public void remove(userComponent removeUserComponent) {
+    public void remove(UserComponent removeUserComponent) {
         userComponents.remove(removeUserComponent);
     }
 
     // Gets one specific node
     @Override
-    public userComponent getComponent(int componentIndex) {
+    public UserComponent getComponent(int componentIndex) {
         return userComponents.get(componentIndex);
     }
 

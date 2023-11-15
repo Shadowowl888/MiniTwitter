@@ -30,9 +30,9 @@ public class AdminPanel extends JFrame {
 	private int totalGroups = 1;
 	private int totalUsers = 0;
 	private JPanel panel;
-	private findUserCompVisitor findUserC = new findUserCompVisitor();
+	private findUserCompVisitor userComp = new findUserCompVisitor();
 	private Group rootGroup = new Group("root");
-	private Tree root = new Tree("root", rootGroup);
+	private CompositeTree root = new CompositeTree("root", rootGroup);
 
 	// Singleton Patterm
 	public static AdminPanel getInstance() {
@@ -45,24 +45,24 @@ public class AdminPanel extends JFrame {
 	// Create default JFrame from Java Swing
 	private AdminPanel() {
 		// Create frame for content
-		JPanel contentPane;
-		this.setTitle("Admin Panel");
+		JPanel pane;
+		this.setTitle("MiniTwitter Admin Panel");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 600);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(1, 0, 0, 0));
+		pane = new JPanel();
+		pane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(pane);
+		pane.setLayout(new GridLayout(1, 0, 0, 0));
 
-		// Create split pane
+		// Create split pane of JFrame
 		JSplitPane splitPane = new JSplitPane();
-		contentPane.add(splitPane);
+		pane.add(splitPane);
 
-		// Set left panel
-		JPanel tree_Panel = new JPanel();
-		splitPane.setLeftComponent(tree_Panel);
+		// Set left panel of JFrame
+		JPanel treePanel = new JPanel();
+		splitPane.setLeftComponent(treePanel);
 
-		// Set right panel
+		// Set right panel of JFrame
 		panel = new JPanel();
 		splitPane.setRightComponent(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -73,15 +73,15 @@ public class AdminPanel extends JFrame {
 		// Set default selection to be root in Jtree
 		DefaultMutableTreeNode firstLeaf = ((DefaultMutableTreeNode) tree.getModel().getRoot()).getFirstLeaf();
 		tree.setSelectionPath(new TreePath(firstLeaf.getPath()));
-		tree_Panel.add(tree);
+		treePanel.add(tree);
 
-		// Panel to add user
+		// Add users and groups buttons panel
 		addComponents();
-		// Open user control panel
+		// Open individual user view panel
 		userControlPanel();
-		// Total users/group panel
+		// Total number of users and groups panel
 		userComponentCount();
-		// Message Panel
+		// Total number of messages panel
 		messageCount();
 
 		setVisible(true);
@@ -111,14 +111,15 @@ public class AdminPanel extends JFrame {
 																			// Groups in tree
 				User user = new User(userTextField.getText()); // Create user object using the text field as
 																// the UID
-				Tree selectedGroup = root.accept(findUserC, tempGroup);
+				CompositeTree selectedGroup = root.accept(userComp, tempGroup);
 				// Add user to the group diretory if the user does not exit already
 				if (selectedGroup != null && selectedGroup.getUserComponent() instanceof Group) {
-					if (root.accept(findUserC, user) != null) {
+					if (root.accept(userComp, user) != null) {
 						System.out.println("Error. User already exits.");
 						return;
 					}
-					root.accept(findUserC, tempGroup).getChildren().add(new Tree(userTextField.getText(), user));
+					root.accept(userComp, tempGroup).getChildren()
+							.add(new CompositeTree(userTextField.getText(), user));
 					// Update UI
 					child = new DefaultMutableTreeNode(userTextField.getText());
 					selectedElement.add(child);
@@ -153,13 +154,13 @@ public class AdminPanel extends JFrame {
 																			// Groups in tree
 				Group userGroup = new Group(groupTextField.getText()); // Create userGroup object using the text
 																		// field as the UID
-				Tree selectedGroup = root.accept(findUserC, tempGroup);
+				CompositeTree selectedGroup = root.accept(userComp, tempGroup);
 				if (selectedGroup != null && selectedGroup.getUserComponent() instanceof Group) {
-					if (root.accept(findUserC, userGroup) != null) {
+					if (root.accept(userComp, userGroup) != null) {
 						System.out.println("Error: The definied group already exists.");
 						return;
 					}
-					selectedGroup.getChildren().add(new Tree(groupTextField.getText(), userGroup));
+					selectedGroup.getChildren().add(new CompositeTree(groupTextField.getText(), userGroup));
 					// Update UI
 					child = new DefaultMutableTreeNode(groupTextField.getText());
 					selectedElement.add(child);
@@ -187,8 +188,9 @@ public class AdminPanel extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultMutableTreeNode selectedElement = (DefaultMutableTreeNode) tree.getSelectionPath()
 						.getLastPathComponent();
-				Tree selectedNode = root.accept(findUserC, new User(selectedElement.toString()));
-				userPanel userPanel = new userPanel((User) selectedNode.getUserComponent(), root);
+				CompositeTree selectedNode = root.accept(userComp, new User(selectedElement.toString()));
+				// UserPanel userPanel = new UserPanel((User) selectedNode.getUserComponent(),
+				// root);
 			}
 		});
 		userView.add(openUserViewButton);
