@@ -46,6 +46,7 @@ Figure 1. The UI for admin control panel
 <img src="UIDesigns/Figure1.png" alt="Figure 1. The UI for admin control panel" width="700" />
 
 Figure 2. The UI for user view
+
 <img src="UIDesigns/Figure2.png" alt="Figure 2. The UI for user view" width="200" />
 
 Figure 3. You can open as many user views as you want by selecting the user in the tree and clicking on the Open User View button
