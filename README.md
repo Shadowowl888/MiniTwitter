@@ -12,7 +12,7 @@ A project hub for all the CS3560 assignments.
 
 The Singleton Pattern was used to create one instance of the Admin Panel to act as a manager control in the main driver program, App.java. Composite Pattern was used to add user and groups to the tree and keep track of the group directory using the Java Swing UI Library. The Composite Pattern ensured that unique users and groups were added to the program and kept track of the tree hiearchy structure. Visitor Pattern is used to keep track of the statisitical information with the users and groups. Observer pattern was used to add, remove, and update the list of followerers for the user to update the news feed for when new tweets were sent.
 
-#### Project Demo
+### Project Demo
 [<img src="UIDesigns/AdminPanel.png" width="50%">](https://youtu.be/byLPse_k06M "CS3560 Project 2 Demo - Mini Twitter")
 
 
