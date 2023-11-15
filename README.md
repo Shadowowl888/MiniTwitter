@@ -14,6 +14,7 @@ The Singleton Pattern was used to create one instance of the Admin Panel to act 
 
 ### Project Demo
 <a href="https://youtu.be/byLPse_k06M" target="_blank">CS3560 Project 2 Demo - Mini Twitter</a>
+
 [<img src="UIDesigns/AdminPanel.png" width="50%">](https://youtu.be/byLPse_k06M "CS3560 Project 2 Demo - Mini Twitter")
 
 ### Problem Description
