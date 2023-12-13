@@ -18,13 +18,12 @@ The Singleton Pattern was used to create one instance of the Admin Panel to act 
 [<img src="UIDesigns/AdminPanel.png" width="50%">](https://youtu.be/DS9L06Vo7pw "CS3560 Project 2 Demo - Mini Twitter")
 
 ### Problem Description
-In this programming assignment, you will build a Java­based Mini Twitter with graphical user interface (GUI) using Java Swing. This is going to be a pure desktop program, without web or mobile components. The goal of this assignment is to let you experience how to apply design patterns to build extensible software systems.
+In this programming assignment, you will build a Java­based Mini Twitter with graphical user interface (GUI) using <b>Java Swing</b>. This is going to be a pure desktop program, without web or mobile components. The goal of this assignment is to let you experience how to apply design patterns to build extensible software systems.
 
 The basic functions of the system include:
-1. There is a centralized admin control panel to create users and user groups.
-2. A user has 1) an unique ID; 2) a list of user IDs that are following this user (followers);
-3) a list of user IDs being followed by this user (followings); 4) a news feed list containing a list of Twitter messages.
-3. A user group has an unique ID, which can be used to group users. A user group can contain any number of users. The same user can only be included in one group. Of course, a user group can contain other user groups recursively. There is always a root group called Root to include everything.
+1. There is a centralized admin control panel to create <b>users</b> and <b>user groups</b>.
+2. A <b>user</b> has 1) an unique ID; 2) a list of user IDs that are following this user (followers); 3) a list of user IDs being followed by this user (followings); 4) a news feed list containing a list of Twitter messages.
+3. A <b>user group</b> has an unique ID, which can be used to group users. A user group can contain any number of users. The same user can only be included in one group. Of course, a user group can contain other user groups recursively. There is always a root group called Root to include everything.
 4. Users can choose to follow other users (not user groups) by providing the target user ID. Unfollow is not required.
 5. Users can also post a short Tweet message (a String), so that all the followers can see this message in their news feed lists. Of course, the user can also see his or her own posted messages.
 6. A few analysis features are needed in the admin control panel: 1) output the total number of users; 2) output the total number of groups; 3) output the total number of Tweet messages in all the users’ news feed; 4) output the percentage of the positive Tweet messages in all the users’ news feed (the message containing positive words, such as good, great, excellent, etc.) Free free to decide the positive words.
@@ -46,7 +45,6 @@ Figure 1. The UI for admin control panel
 <img src="UIDesigns/Figure1.png" alt="Figure 1. The UI for admin control panel" width="700" />
 
 Figure 2. The UI for user view
-
 <img src="UIDesigns/Figure2.png" alt="Figure 2. The UI for user view" width="200" />
 
 Figure 3. You can open as many user views as you want by selecting the user in the tree and clicking on the Open User View button
@@ -54,17 +52,21 @@ Figure 3. You can open as many user views as you want by selecting the user in t
 
 The UI should be built using Java Swing. There are tons of references and tutorials about how to write Java Swing program. For instance, http://docs.oracle.com/javase/tutorial/uiswing/.
 
-You are encouraged to use as many design patterns as you can (even using the one we have not covered in the class). The required patterns are Singleton, Observer, Visitor, and Composite.
+You are encouraged to use as many design patterns as you can (even using the one we have not covered in the class). The required patterns are <b>Singleton, Observer, Visitor, and Composite</b>.
 
 Your program should contain a Driver class with a main() method to trigger the Admin Control Panel.
 
 As usual, this programming assignment is very open. For the details that are not clearly specified above, feel free to make your own design decisions, but you should always clarify your decisions in your code with comments. Also, you can email me to for any clarification about the requirements.
 
 ### Submission Directions
-Everyone should submit your assignment (checkin your code) through GitHub. You should use your own GitHub account, and create a project repository for your own assignment. To submit your assignment, simply send me an email with your project repository link, and I will go to your repository to check your changes and commits.
+Your submission should include 2 components:
 
-Note: You need to create a new repository for Assignment 2 (don’t reuse the repository
-for Assignment 1).
+1. GitHub Repo URL. Everyone should submit your assignment (checkin your code) through GitHub. You should use your own GitHub account, and create a project repository for your own assignment.
+2. A short video to demo the running project and briefly explain how you used the design patterns (uploaded to Youtube as public or unlisted). The video should not be more than 2 mins.
+
+To submit your assignment, simply fill this Google form: https://goo.gl/forms/3b2Ur6CKmbPwZVnh2
+
+<b>Note: You need to create a new repository for Assignment 2 (don’t reuse the repository for Assignment 1).</b>
 
 ### Getting Help
 Please let me know if you need to meet to discuss any problems that you may have.
@@ -74,13 +76,14 @@ Please let me know if you need to meet to discuss any problems that you may have
 
 ### Problem Description
 In this programming assignment, you will be upgrading your Mini Twitter to add the following features to it:
-1. User/Group ID verification. One more button should be added to the main Admin UI to validate if all the IDs used in the users and groups are valid, based on the following two criteria: 1) all the IDs must be unique - there should not be duplicated IDs; 2) all the IDs should not contain spaces. You need to show a dialog (or print in console if GUI is not available) to tell whether all the IDs are valid or not. Note: you only need to output the validation result. You do NOT need to fix or prevent the invalid inputs.
-2. Add creation time attribute to User and Group. Both User and Group should include a new attribute - creationTime. The type should be long. And its value should be given whenever the object is created. You can call System.currenttimemillis() to get the current system timestamp. When you open the User View, this time value should be display (or printed out) somewhere in the UI (or console).
-3. Add last update time attribute to User. Similar to feature 2 listed above, an extra attribute - lastUpdateTime should be included in User, with the type to be long. This attribute should be updated whenever a new tweet is posted, for both the user and all
-the followers (in other words, whenever the news feed gets updated). Similar to 2, you also need to display the time in the User View UI (or console).
-4. Find the last updated User. One more button should be added to the main Admin UI to output the ID of the user who made the last update. This should be based on the time attribute you added in feature 3. When users share the same lastUpdateTime, you do not need to sort them. Just outputting one of them is fine. Again, output the ID in your UI or console.
+1. <b>User/Group ID verification.</b> One more button should be added to the main Admin UI to validate if all the IDs used in the users and groups are valid, based on the following two criteria: 1) all the IDs must be unique - there should not be duplicated IDs; 2) all the IDs should not contain spaces. You need to show a dialog (or print in console if GUI is not available) to tell whether all the IDs are valid or not. Note: you only need to output the validation result. You do NOT need to fix or prevent the invalid inputs.
+2. <b>Add creation time attribute to User and Group.</b> Both User and Group should include a new attribute - creationTime. The type should be long. And its value should be given whenever the object is created. You can call System.currenttimemillis() to get the current system timestamp. When you open the User View, this time value should be display (or printed out) somewhere in the UI (or console).
+3. <b>Add last update time attribute to User.</b> Similar to feature 2 listed above, an extra attribute - lastUpdateTime should be included in User, with the type to be long. This attribute should be updated whenever a new tweet is posted, for both the user and all the followers (in other words, whenever the news feed gets updated). Similar to 2, you also need to display the time in the User View UI (or console).
+4. <b>Find the last updated User.</b> One more button should be added to the main Admin UI to output the ID of the user who made the last update. This should be based on the time attribute you added in feature 3. When users share the same lastUpdateTime, you do not need to sort them. Just outputting one of them is fine. Again, output the ID in your UI or console.
 
 ### Submission Directions
-Everyone should write the code for Assignment 3 directly using your Assignment 2 project. When you try to push your changes to GitHub, you should use the same repository for Assignment 2 and do an extra commit to that repository. If you have trouble to commit and push the extra changes, it is also OK to create a new repository and push everything together there.
-No video is needed for this assignment.
-Please submit your URL to <a href="https://goo.gl/forms/CY5MFeetIAbWtqoi1" target="_blank">https://goo.gl/forms/CY5MFeetIAbWtqoi1</a>
+Everyone should write the code for Assignment 3 directly using your Assignment 2 project. When you try to push your changes to GitHub, <b>you should use the same repository for Assignment 2 and do an extra commit to that repository</b>. If you have trouble to commit and push the extra changes, it is also OK to create a new repository and push everything together there.
+
+<b>No video is needed for this assignment.</b>
+
+Please submit your URL to https://goo.gl/forms/CY5MFeetIAbWtqoi1
