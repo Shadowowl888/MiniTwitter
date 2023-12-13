@@ -31,10 +31,12 @@ public class AdminPanel extends JFrame {
 	private int totalUsers = 0;
 	private JPanel panel;
 	private findUserCompVisitor userComp = new findUserCompVisitor();
+	// private ValidatedVisitor validatedVisitor = new ValidatedVisitor();
+	// private lastUpdateUserVisitor lastUpdated = new lastUpdatedUser();
 	private Group rootGroup = new Group("root");
 	private CompositeTree root = new CompositeTree("root", rootGroup);
 
-	// Singleton Patterm
+	// Singleton Pattern
 	public static AdminPanel getInstance() {
 		if (instance == null) {
 			instance = new AdminPanel();
@@ -194,6 +196,30 @@ public class AdminPanel extends JFrame {
 			}
 		});
 		userView.add(openUserViewButton);
+
+		// Assignment 3 - Last Updated User Button
+		JButton lastUpdateButton = new JButton("Last Updated User");
+		lastUpdateButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("The last updated user is: " + root.accept(lastUpdated));
+			}
+		});
+		userView.add(lastUpdateButton);
+
+		// Assignment 3 - Validate User Button
+		JButton validateButton = new JButton("Validate Users");
+		validateButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean isValid = root.accept(validatedVisitor);
+				if (isValid == true) {
+					System.out.println("Usernames are valid.");
+				} else {
+					System.out.println("Usernames are not valid.");
+				}
+			}
+		});
+		userView.add(validateButton);
+		validateButton.setPreferredSize(new Dimension(150, 25));
 	}
 
 	// Display total number of users and groups
@@ -243,7 +269,6 @@ public class AdminPanel extends JFrame {
 
 	// Display total message count and positive message ratio
 	private void messageCount() {
-
 		JPanel message_Panel = new JPanel();
 		JLabel msgTotal_label = new JLabel("Total Message: 0");
 		JLabel posPerc_label = new JLabel("Positive ratio: ");
@@ -290,5 +315,4 @@ public class AdminPanel extends JFrame {
 
 		posPercLbl_panel.add(posPerc_label);
 	}
-
 }

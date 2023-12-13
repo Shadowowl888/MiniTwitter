@@ -10,6 +10,7 @@ public class NewsFeed implements Observer, Observable {
 
     private ArrayList<String> messages;
     private ArrayList<Observer> observerList = new ArrayList<>();
+    private long lastUpdated;
 
     public NewsFeed() {
         this.messages = new ArrayList<String>();
@@ -20,6 +21,12 @@ public class NewsFeed implements Observer, Observable {
     public void update(String tweet) {
         messages.add(tweet);
         notifyFollowers("");
+        lastUpdated = System.currentTimeMillis();
+    }
+
+    // Return the last updated time of newsfeed
+    public long getLastUpdatedTime() {
+        return lastUpdated;
     }
 
     // Return the messages in user's newsfeed

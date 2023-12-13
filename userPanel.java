@@ -55,6 +55,7 @@ public class UserPanel extends JFrame implements Observer {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
+		timePanel();
 		followUser();
 		followingList();
 		tweetPanel();
@@ -200,6 +201,32 @@ public class UserPanel extends JFrame implements Observer {
 			revArrayList.add(userNewsFeed.get(i));
 		}
 		newsFeed_Jlist.setListData(revArrayList.toArray());
+	}
+
+	// Assignment 3 - Time Update
+	private void timePanel() {
+		JPanel updatePanel = new JPanel();
+		contentPane.add(updatePanel);
+		updatePanel.setLayout(new GridLayout(1, 0, 0, 0));
+		// Set time created
+		JPanel timeCreatedPanel = new JPanel();
+		updatePanel.add(timeCreated_panel);
+
+		JLabel timeCreatedLabel = new JLabel("");
+		timeCreatedPanel.add(timeCreatedLabel);
+		// Convert time to readable format
+		SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy HH:mm:ss");
+		Date resultdate = new Date(user.getCreationTime());
+		timeCreatedLabel.setText(sdf.format(resultdate));
+
+		// Set most recent update time
+		JPanel lastUpdatePanel = new JPanel();
+		updatePanel.add(lastUpdatePanel);
+
+		JLabel lastUpdateLabel = new JLabel("");
+		Date updateTime = new Date(user.getLastUpdateTime());
+		lastUpdateLabel.setText(sdf.format(updateTime));
+		lastUpdatePanel.add(lastUpdateLabel);
 	}
 
 	// Update the user UI tweets when changes are made in news feed

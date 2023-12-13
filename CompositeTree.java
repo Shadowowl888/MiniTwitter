@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class CompositeTree {
+public class CompositeTree extends Visitable {
 
     private String uid;
     private List<CompositeTree> children = new LinkedList<>();
@@ -66,5 +66,13 @@ public class CompositeTree {
     // Accept visitors
     public CompositeTree accept(Visitor visitor, UserComponent userComp) {
         return visitor.visit(this, userComp);
+    }
+
+    public boolean accept(ValidatedVisitor visitor) {
+        return visitor.visit(this);
+    }
+
+    public String accept(lastUpdatedUser visitor) {
+        return visitor.visit(this);
     }
 }

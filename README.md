@@ -68,3 +68,19 @@ for Assignment 1).
 
 ### Getting Help
 Please let me know if you need to meet to discuss any problems that you may have.
+
+
+## Project 3: Mini Twitter 2.0
+
+### Problem Description
+In this programming assignment, you will be upgrading your Mini Twitter to add the following features to it:
+1. User/Group ID verification. One more button should be added to the main Admin UI to validate if all the IDs used in the users and groups are valid, based on the following two criteria: 1) all the IDs must be unique - there should not be duplicated IDs; 2) all the IDs should not contain spaces. You need to show a dialog (or print in console if GUI is not available) to tell whether all the IDs are valid or not. Note: you only need to output the validation result. You do NOT need to fix or prevent the invalid inputs.
+2. Add creation time attribute to User and Group. Both User and Group should include a new attribute - creationTime. The type should be long. And its value should be given whenever the object is created. You can call System.currenttimemillis() to get the current system timestamp. When you open the User View, this time value should be display (or printed out) somewhere in the UI (or console).
+3. Add last update time attribute to User. Similar to feature 2 listed above, an extra attribute - lastUpdateTime should be included in User, with the type to be long. This attribute should be updated whenever a new tweet is posted, for both the user and all
+the followers (in other words, whenever the news feed gets updated). Similar to 2, you also need to display the time in the User View UI (or console).
+4. Find the last updated User. One more button should be added to the main Admin UI to output the ID of the user who made the last update. This should be based on the time attribute you added in feature 3. When users share the same lastUpdateTime, you do not need to sort them. Just outputting one of them is fine. Again, output the ID in your UI or console.
+
+### Submission Directions
+Everyone should write the code for Assignment 3 directly using your Assignment 2 project. When you try to push your changes to GitHub, you should use the same repository for Assignment 2 and do an extra commit to that repository. If you have trouble to commit and push the extra changes, it is also OK to create a new repository and push everything together there.
+No video is needed for this assignment.
+Please submit your URL to <a href="https://goo.gl/forms/CY5MFeetIAbWtqoi1" target="_blank">https://goo.gl/forms/CY5MFeetIAbWtqoi1</a>
